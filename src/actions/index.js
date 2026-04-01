@@ -35,9 +35,15 @@ export async function fetchJobForRecruiterAction(id) {
 }
 
 //candidate
-export async function fetchJobForCandidateAction() {
+export async function fetchJobForCandidateAction(filterParams = {}) {
   await connectToDB();
-  const result = await Job.find({});
+  let updateParams = {};
+  // console.log("filterParams received:", filterParams); // 👈 verify this
+  Object.keys(filterParams).forEach(filteKey => {
+    updateParams[filteKey] = {$in : filterParams[filteKey].split(',')}
+  })
+    // console.log("MongoDB query:", updateParams); // 👈 verify this
+  const result = await Job.find(filterParams && Object.keys(filterParams).length > 0 ? updateParams : {});
   return JSON.parse(JSON.stringify(result));
 }
 
@@ -97,5 +103,13 @@ export async function getCandidateDetailsByAction(currentCandidateID) {
   await connectToDB();
   const result = await Profile.findOne({ userId: currentCandidateID });
 
+  return JSON.parse(JSON.stringify(result));
+}
+
+// create ifilter catehories
+
+export async function createFilterCategoryAction(){
+  await connectToDB();
+  const result = await Job.find({});
   return JSON.parse(JSON.stringify(result));
 }

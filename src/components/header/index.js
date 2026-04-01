@@ -33,6 +33,7 @@ function Header({ profileInfo , user }) {
               <Link
                 key={menuItem.label}
                 href={menuItem.path}
+                onClick={()=>sessionStorage.removeItem('filterParams')}
                 className="text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors"
               >
                 {menuItem.label}
