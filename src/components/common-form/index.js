@@ -4,7 +4,6 @@ import { Label } from "../ui/label";
 
 function CommonForm({
   action,
-
   isBtnDisabled,
   formControls,
   buttonText,
@@ -25,26 +24,27 @@ function CommonForm({
               placeholder={getCurrentControl.placeholder}
               name={getCurrentControl.name}
               id={getCurrentControl.name}
-             value={formData[getCurrentControl.name]}
+              value={formData[getCurrentControl.name] || ""}
               onChange={(event) =>
                 setFormData({
                   ...formData,
                   [event.target.name]: event.target.value,
                 })
               }
-              className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 "
+              className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
         );
-
         break;
+
       case "file":
         content = (
-          <Label key={getCurrentControl.name}
+          <Label
+            key={getCurrentControl.name}
             htmlFor={getCurrentControl.name}
-            className="flexx bg-gray-100 items-center px-3 py-3 mx-auto mt-6 text-center border-2 border-dashed rounded-lg cursor-pointer"
+            className="flex bg-gray-100 items-center px-3 py-3 mx-auto mt-6 text-center border-2 border-dashed rounded-lg cursor-pointer"
           >
-            <h2> Resume {getCurrentControl.Label}</h2>
+            <h2>Resume {getCurrentControl.Label}</h2>
             <Input
               onChange={handleFileChange}
               id={getCurrentControl.name}
@@ -52,7 +52,6 @@ function CommonForm({
             />
           </Label>
         );
-
         break;
 
       default:
@@ -64,18 +63,17 @@ function CommonForm({
               placeholder={getCurrentControl.placeholder}
               name={getCurrentControl.name}
               id={getCurrentControl.name}
-             value={formData[getCurrentControl.name]}
+              value={formData[getCurrentControl.name] || ""}
               onChange={(event) =>
                 setFormData({
                   ...formData,
                   [event.target.name]: event.target.value,
                 })
               }
-              className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 "
+              className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
         );
-
         break;
     }
     return content;
@@ -87,7 +85,7 @@ function CommonForm({
       <div className="mt-6 w-full">
         <Button
           type={btnType || "submit"}
-          className="disabled:opacity-60 flex h-11 item-center justify-center px-5"
+          className="disabled:opacity-60 flex h-11 items-center justify-center px-5"
           disabled={isBtnDisabled}
         >
           {buttonText}

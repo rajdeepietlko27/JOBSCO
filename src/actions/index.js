@@ -13,9 +13,10 @@ export async function createProfileAction(formData, pathTorevalidate) {
   revalidatePath(pathTorevalidate);
 }
 
-export async function fetchProfileAction(id) {
+export async function fetchProfileAction(userId) {
   await connectToDB();
-  const result = await Profile.findOne({ userId: id });
+  // ✅ Sort by _id descending to get the latest document
+  const result = await Profile.findOne({ userId }).sort({ _id: -1 });
   return JSON.parse(JSON.stringify(result));
 }
 
@@ -39,11 +40,13 @@ export async function fetchJobForCandidateAction(filterParams = {}) {
   await connectToDB();
   let updateParams = {};
   // console.log("filterParams received:", filterParams); // 👈 verify this
-  Object.keys(filterParams).forEach(filteKey => {
-    updateParams[filteKey] = {$in : filterParams[filteKey].split(',')}
-  })
-    // console.log("MongoDB query:", updateParams); // 👈 verify this
-  const result = await Job.find(filterParams && Object.keys(filterParams).length > 0 ? updateParams : {});
+  Object.keys(filterParams).forEach((filteKey) => {
+    updateParams[filteKey] = { $in: filterParams[filteKey].split(",") };
+  });
+  // console.log("MongoDB query:", updateParams); // 👈 verify this
+  const result = await Job.find(
+    filterParams && Object.keys(filterParams).length > 0 ? updateParams : {},
+  );
   return JSON.parse(JSON.stringify(result));
 }
 
@@ -71,7 +74,7 @@ export async function fetchJobApplicationForRecruiter(recruiterID) {
 export async function updateJobApplicationAction(data, pathToRevlidate) {
   await connectToDB();
   const {
-    _id,          // ✅ add this
+    _id, // ✅ add this
     recruiterUserID,
     name,
     email,
@@ -108,8 +111,37 @@ export async function getCandidateDetailsByAction(currentCandidateID) {
 
 // create ifilter catehories
 
-export async function createFilterCategoryAction(){
+export async function createFilterCategoryAction() {
   await connectToDB();
   const result = await Job.find({});
   return JSON.parse(JSON.stringify(result));
+}
+
+// update profile action
+
+export async function updateProfileAction(data, pathTorevalidate) {
+  await connectToDB();
+  const {
+    userId, role, email, isPremiumUser,
+    memberShipType, memberShipStartDate, memberShipEndDate,
+    recruiterInfo, candidateInfo, _id,
+  } = data;
+
+  console.log("UPDATE - recruiterInfo:", JSON.stringify(recruiterInfo));
+  console.log("UPDATE - _id:", _id);
+
+  // ✅ Use replaceOne instead
+  const result = await Profile.replaceOne(
+    { _id: _id },
+    {
+      userId, role, email, isPremiumUser,
+      memberShipType, memberShipStartDate, memberShipEndDate,
+      recruiterInfo,
+      candidateInfo,
+    }
+  );
+
+  // console.log("Update result:", result); // 👈 check if modifiedCount is 1
+
+  revalidatePath(pathTorevalidate);
 }

@@ -11,7 +11,7 @@ const ProfileSchema = new mongoose.Schema({
   recruiterInfo: {
     name: String,
     companyName: String,
-    CompanyRole: String,
+    companyRole: String,
   },
   candidateInfo: {
     name: String,

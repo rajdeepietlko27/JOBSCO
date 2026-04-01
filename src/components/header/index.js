@@ -22,7 +22,7 @@ function Header({ profileInfo , user }) {
     <div className="border-b shadow-sm bg-white">
       <header className="flex h-16 w-full shrink-0 items-center px-4">
 
-        <Link href="/" className="mr-6 text-xl font-bold text-blue-600">
+        <Link href="/" className="mr-6   text-3xl font-bold text-blue-600">
           JOBSCO
         </Link>
 
