@@ -6,13 +6,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import CommonForm from "../common-form";
 import { initialPostNewJobsFormData, postNewJobsFormControls } from "@/utils";
 import { postNewJobAction } from "@/actions";
+import { toast } from "sonner";
 
-function PostNewJobs({ profileInfo, user }) {
+function PostNewJobs({ profileInfo, user , jobList }) {
   const [showJobDialog, setShowJobDialog] = useState(false);
   const [jobFormData, setJobFormData] = useState({
     ...initialPostNewJobsFormData,
     companyName: profileInfo?.recruiterInfo?.companyName,
   });
+   
+  
+
 
   function handlePostNewButtonvalid() {
     return Object.keys(jobFormData).every(
@@ -35,11 +39,21 @@ function PostNewJobs({ profileInfo, user }) {
     });
     setShowJobDialog(false);
   }
+  function handleAddNewJob() {
+  if (!profileInfo?.isPremiumUser && jobList.length >= 2) {
+    toast.error("You can't post more than 2 jobs.", {
+      description: "Please opt for membership to post more jobs.",
+    });
+    return;
+  }
+  setShowJobDialog(true);
+}
+
 
   return (
     <div>
       <Button
-        onClick={() => setShowJobDialog(true)}
+        onClick={handleAddNewJob}
         className="h-10 px-6 text-sm font-medium rounded-lg bg-black text-white hover:bg-gray-800 transition-colors duration-200"
       >
         + Post a Job

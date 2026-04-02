@@ -128,7 +128,7 @@ function JobListing({
                 ))}
               </Menubar>
             ) : (
-              <PostNewJobs user={user} profileInfo={profileInfo} />
+              <PostNewJobs jobList={jobList} user={user} profileInfo={profileInfo} />
             )}
           </div>
         </div>

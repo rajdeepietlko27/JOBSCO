@@ -7,6 +7,11 @@ import Profile from "@/models/profile";
 import { revalidatePath } from "next/cache";
 import { accessedDynamicData } from "next/dist/server/app-render/dynamic-rendering";
 
+const Stripe = require("stripe");
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
+
 export async function createProfileAction(formData, pathTorevalidate) {
   await connectToDB();
   await Profile.create(formData);
@@ -122,9 +127,16 @@ export async function createFilterCategoryAction() {
 export async function updateProfileAction(data, pathTorevalidate) {
   await connectToDB();
   const {
-    userId, role, email, isPremiumUser,
-    memberShipType, memberShipStartDate, memberShipEndDate,
-    recruiterInfo, candidateInfo, _id,
+    userId,
+    role,
+    email,
+    isPremiumUser,
+    memberShipType,
+    memberShipStartDate,
+    memberShipEndDate,
+    recruiterInfo,
+    candidateInfo,
+    _id,
   } = data;
 
   console.log("UPDATE - recruiterInfo:", JSON.stringify(recruiterInfo));
@@ -134,14 +146,54 @@ export async function updateProfileAction(data, pathTorevalidate) {
   const result = await Profile.replaceOne(
     { _id: _id },
     {
-      userId, role, email, isPremiumUser,
-      memberShipType, memberShipStartDate, memberShipEndDate,
+      userId,
+      role,
+      email,
+      isPremiumUser,
+      memberShipType,
+      memberShipStartDate,
+      memberShipEndDate,
       recruiterInfo,
       candidateInfo,
-    }
+    },
   );
 
   // console.log("Update result:", result); // 👈 check if modifiedCount is 1
 
   revalidatePath(pathTorevalidate);
+}
+
+// create stripe price id based on tier selection
+export async function createPriceIdAction(data) {
+  const session = await stripe.prices.create({
+    currency: "usd",
+    unit_amount: data?.amount * 100,
+    recurring: {
+      interval: "year",
+    },
+    product_data: {
+      name: "Premium Plan",
+    },
+  });
+  return {
+    success: true,
+    id: session?.id,
+  };
+}
+
+// create payment logic
+export async function createStripePaymentAction(data) {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: data?.lineItems,
+    mode: "subscription",
+    success_url: `http://localhost:3000/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: "http://localhost:3000/membership?status=cancel",
+  });
+
+  return {
+    success: true,
+    id: session?.id,
+    url: session?.url,
+  };
 }
