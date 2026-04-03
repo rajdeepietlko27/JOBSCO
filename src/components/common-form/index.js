@@ -17,7 +17,10 @@ function CommonForm({
     switch (getCurrentControl.componentType) {
       case "input":
         content = (
-          <div key={getCurrentControl.name} className="relative flex items-center mt-8">
+          <div
+            key={getCurrentControl.name}
+            className="relative flex items-center mt-8"
+          >
             <Input
               type="text"
               disabled={getCurrentControl.disabled}
@@ -56,7 +59,10 @@ function CommonForm({
 
       default:
         content = (
-          <div key={getCurrentControl.name} className="relative flex items-center mt-8">
+          <div
+            key={getCurrentControl.name}
+            className="relative flex items-center mt-8"
+          >
             <Input
               type="text"
               disabled={getCurrentControl.disabled}
@@ -82,15 +88,17 @@ function CommonForm({
   return (
     <form action={action}>
       {formControls.map((control) => renderInputByComponentTypr(control))}
-      <div className="mt-6 w-full">
-        <Button
-          type={btnType || "submit"}
-          className="disabled:opacity-60 flex h-11 items-center justify-center px-5"
-          disabled={isBtnDisabled}
-        >
-          {buttonText}
-        </Button>
-      </div>
+      {buttonText && (
+        <div className="mt-6 w-full">
+          <Button
+            type={btnType || "submit"}
+            className="disabled:opacity-60 flex h-11 items-center justify-center px-5"
+            disabled={isBtnDisabled}
+          >
+            {buttonText}
+          </Button>
+        </div>
+      )}
     </form>
   );
 }
