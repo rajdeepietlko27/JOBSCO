@@ -4,13 +4,11 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const sessionId = searchParams.get("session_id");
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
   if (!sessionId) {
-    return NextResponse.redirect(`${baseUrl}/membership?status=cancel`);
+    return NextResponse.redirect(new URL("/membership?status=cancel", req.url));
   }
 
   return NextResponse.redirect(
-    `${baseUrl}/membership?status=success`
+    new URL("/membership?status=success", req.url)
   );
 }
