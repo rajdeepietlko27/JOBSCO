@@ -182,13 +182,16 @@ export async function createPriceIdAction(data) {
 }
 
 // create payment logic
+// create payment logic
 export async function createStripePaymentAction(data) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: data?.lineItems,
     mode: "subscription",
-    success_url: `http://localhost:3000/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000/membership?status=cancel",
+    success_url: `${baseUrl}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${baseUrl}/membership?status=cancel`,
   });
 
   return {
