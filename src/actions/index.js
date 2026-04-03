@@ -5,7 +5,6 @@ import Application from "@/models/application";
 import Job from "@/models/job";
 import Profile from "@/models/profile";
 import { revalidatePath } from "next/cache";
-import { accessedDynamicData } from "next/dist/server/app-render/dynamic-rendering";
 
 const Stripe = require("stripe");
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -20,66 +19,56 @@ export async function createProfileAction(formData, pathTorevalidate) {
 
 export async function fetchProfileAction(userId) {
   await connectToDB();
-  // ✅ Sort by _id descending to get the latest document
   const result = await Profile.findOne({ userId }).sort({ _id: -1 });
   return JSON.parse(JSON.stringify(result));
 }
 
-// create job action
 export async function postNewJobAction(formData, pathTorevalidate) {
   await connectToDB();
   await Job.create(formData);
   revalidatePath(pathTorevalidate);
 }
 
-// fetch job action
-//recruiter
 export async function fetchJobForRecruiterAction(id) {
   await connectToDB();
   const result = await Job.find({ recruiterId: id });
   return JSON.parse(JSON.stringify(result));
 }
 
-//candidate
 export async function fetchJobForCandidateAction(filterParams = {}) {
   await connectToDB();
   let updateParams = {};
-  // console.log("filterParams received:", filterParams); // 👈 verify this
   Object.keys(filterParams).forEach((filteKey) => {
     updateParams[filteKey] = { $in: filterParams[filteKey].split(",") };
   });
-  // console.log("MongoDB query:", updateParams); // 👈 verify this
   const result = await Job.find(
     filterParams && Object.keys(filterParams).length > 0 ? updateParams : {},
   );
   return JSON.parse(JSON.stringify(result));
 }
 
-// create job application
 export async function createJobApplicationAction(data, pathTorevalidate) {
   await connectToDB();
   await Application.create(data);
   revalidatePath(pathTorevalidate);
 }
 
-// fetch job application - candidate
 export async function fetchJobApplicationForCandidate(candidateID) {
   await connectToDB();
   const result = await Application.find({ candidateUserId: candidateID });
   return JSON.parse(JSON.stringify(result));
 }
 
-// fetch job application - recruiter
 export async function fetchJobApplicationForRecruiter(recruiterID) {
   await connectToDB();
   const result = await Application.find({ recruiterUserID: recruiterID });
   return JSON.parse(JSON.stringify(result));
 }
-// update job application
+
 export async function updateJobApplicationAction(data, pathToRevlidate) {
   await connectToDB();
   const {
-    _id, // ✅ add this
+    _id,
     recruiterUserID,
     name,
     email,
@@ -106,23 +95,17 @@ export async function updateJobApplicationAction(data, pathToRevlidate) {
   revalidatePath(pathToRevlidate);
 }
 
-// get candidate details by id
 export async function getCandidateDetailsByAction(currentCandidateID) {
   await connectToDB();
   const result = await Profile.findOne({ userId: currentCandidateID });
-
   return JSON.parse(JSON.stringify(result));
 }
-
-// create ifilter catehories
 
 export async function createFilterCategoryAction() {
   await connectToDB();
   const result = await Job.find({});
   return JSON.parse(JSON.stringify(result));
 }
-
-// update profile action
 
 export async function updateProfileAction(data, pathTorevalidate) {
   await connectToDB();
@@ -139,11 +122,7 @@ export async function updateProfileAction(data, pathTorevalidate) {
     _id,
   } = data;
 
-  console.log("UPDATE - recruiterInfo:", JSON.stringify(recruiterInfo));
-  console.log("UPDATE - _id:", _id);
-
-  // ✅ Use replaceOne instead
-  const result = await Profile.replaceOne(
+  await Profile.replaceOne(
     { _id: _id },
     {
       userId,
@@ -158,12 +137,38 @@ export async function updateProfileAction(data, pathTorevalidate) {
     },
   );
 
-  // console.log("Update result:", result); // 👈 check if modifiedCount is 1
-
   revalidatePath(pathTorevalidate);
 }
 
-// create stripe price id based on tier selection
+// ✅ NEW - Delete recruiter + all their jobs + all applications
+export async function deleteRecruiterAction(userId, pathTorevalidate) {
+  try {
+    await connectToDB();
+
+    // Step 1: Find all jobs by this recruiter
+    const recruiterJobs = await Job.find({ recruiterId: userId });
+    const jobIds = recruiterJobs.map((job) => job._id.toString());
+
+    // Step 2: Delete all applications for those jobs
+    if (jobIds.length > 0) {
+      await Application.deleteMany({ jobId: { $in: jobIds } });
+    }
+
+    // Step 3: Delete all jobs by this recruiter
+    await Job.deleteMany({ recruiterId: userId });
+
+    // Step 4: Delete the recruiter profile
+    await Profile.findOneAndDelete({ userId });
+
+    revalidatePath(pathTorevalidate || "/");
+
+    return { success: true };
+  } catch (error) {
+    console.error("deleteRecruiterAction error:", error.message);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function createPriceIdAction(data) {
   const session = await stripe.prices.create({
     currency: "usd",
@@ -181,7 +186,6 @@ export async function createPriceIdAction(data) {
   };
 }
 
-// create payment logic
 export async function createStripePaymentAction(data) {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
