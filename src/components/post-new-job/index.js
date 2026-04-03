@@ -7,6 +7,7 @@ import CommonForm from "../common-form";
 import { initialPostNewJobsFormData, postNewJobsFormControls } from "@/utils";
 import { postNewJobAction } from "@/actions";
 import { toast } from "sonner";
+import Link from "next/link";
 
 function PostNewJobs({ profileInfo, user , jobList }) {
   const [showJobDialog, setShowJobDialog] = useState(false);
@@ -43,6 +44,7 @@ function PostNewJobs({ profileInfo, user , jobList }) {
   if (!profileInfo?.isPremiumUser && jobList.length >= 2) {
     toast.error("You can't post more than 2 jobs.", {
       description: "Please opt for membership to post more jobs.",
+      action : <Link href={'/membership'} >Choose Membership</Link>
     });
     return;
   }

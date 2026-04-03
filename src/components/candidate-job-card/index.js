@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import CommonCard from "../common-card";
 import JobIcon from "../job-icon";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 import {
   Drawer,
   DrawerContent,
@@ -10,6 +11,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { createJobApplicationAction } from "@/actions";
+import Link from "next/link";
 
 function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
   const [showJobDetailsDrawer, setShowJobDetailsDrawer] = useState(false);
@@ -17,6 +19,17 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications }) {
   console.log(jobApplications);
 
   async function handleJobApply(params) {
+    if(!profileInfo?.isPremiumUser && jobApplications.length >= 2){
+
+       toast.error("You can't apply more than 2 jobs.", {
+      description: "Please opt for membership to more jobs.",
+      action : <Link href={'/membership'} >Choose Membership</Link>
+    });
+    return;
+    }
+
+
+
     await createJobApplicationAction(
       {
         recruiterUserID: jobItem?.recruiterId,
