@@ -191,8 +191,8 @@ export async function createStripePaymentAction(data) {
     payment_method_types: ["card"],
     line_items: data?.lineItems,
     mode: "subscription",
-    success_url: `http://localhost:3000/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000/membership?status=cancel",
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/membership?status=cancel`,
   });
 
   return {
