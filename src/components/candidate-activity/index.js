@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
-// Inline icon — replace with your <JobIcon /> if preferred
+
 function RocketIcon({ color = "#fff" }) {
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -38,10 +38,10 @@ function JobCard({ title, companyName, status }) {
 
   return (
     <div className="relative flex items-center gap-5 bg-white border border-gray-100 rounded-2xl px-6 py-5 overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-gray-200 cursor-pointer">
-      {/* Status accent bar */}
+    
       <span className={`absolute right-0 top-0 bottom-0 w-1 rounded-r-2xl ${s.bar}`} />
 
-      {/* Icon */}
+     
       <div
         className={`w-13 h-13 shrink-0 rounded-xl bg-gradient-to-br ${s.icon} flex items-center justify-center`}
         style={{ width: 52, height: 52 }}
@@ -49,7 +49,7 @@ function JobCard({ title, companyName, status }) {
         <RocketIcon />
       </div>
 
-      {/* Info */}
+ 
       <div className="flex-1 min-w-0">
         <p className="font-semibold text-gray-900 text-[15px] tracking-tight truncate">
           {title}
@@ -59,14 +59,14 @@ function JobCard({ title, companyName, status }) {
         </p>
       </div>
 
-      {/* Badge */}
+   
       <span
         className={`shrink-0 text-[11px] font-medium px-3 py-1 rounded-full capitalize ${s.badge}`}
       >
         {status}
       </span>
 
-      {/* Arrow */}
+   
       <span className="text-gray-300 text-lg ml-1 shrink-0">›</span>
     </div>
   );
@@ -93,7 +93,7 @@ function CandidateActivity({ jobList, jobApplicants }) {
       style={{ background: "#f7f6f2", fontFamily: "'DM Sans', sans-serif" }}
     >
       <Tabs defaultValue={uniqueStatusArray[0]} className="w-full">
-        {/* Header */}
+     
         <div className="mx-auto max-w-5xl px-12">
           <div className="flex items-end justify-between border-b border-gray-200 pt-14 pb-5">
             <h1
@@ -112,7 +112,7 @@ function CandidateActivity({ jobList, jobApplicants }) {
                   className="px-5 py-2 rounded-lg text-[13px] capitalize font-normal text-gray-500 data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:font-medium data-[state=active]:shadow-sm transition-all"
                 >
                   {status}
-                  {/* Count chip */}
+                
                   <span className="ml-2 inline-flex items-center justify-center bg-gray-900 text-white text-[10px] font-medium rounded-full px-1.5 py-0.5 leading-none">
                     {getJobsForStatus(status).length}
                   </span>
@@ -122,7 +122,7 @@ function CandidateActivity({ jobList, jobApplicants }) {
           </div>
         </div>
 
-        {/* Content */}
+        
         <div className="mx-auto max-w-5xl px-12 pt-8 pb-20">
           {uniqueStatusArray.map((status) => (
             <TabsContent key={status} value={status}>

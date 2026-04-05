@@ -308,7 +308,7 @@ async function Home() {
       `}</style>
 
       <div className="home-root">
-        {/* Background blobs */}
+      
         <div className="blob blob-1" />
         <div className="blob blob-2" />
         <div className="blob blob-3" />
@@ -318,7 +318,7 @@ async function Home() {
         <div className="content-wrap">
           <div className="container-inner">
 
-            {/* LEFT: Text */}
+        
             <div>
               <div className="badge-row fade-up fade-up-1">
                 <span className="badge">✦ New</span>
@@ -362,7 +362,7 @@ async function Home() {
               </div>
             </div>
 
-            {/* RIGHT: Image */}
+       
             <div className="img-side">
               <div className="img-card img-fade">
                 <img
@@ -371,7 +371,7 @@ async function Home() {
                 />
               </div>
 
-              {/* Floating chips */}
+          
               <div className="chip chip-1">
                 <span className="chip-dot" style={{background:'#06d6a0'}} />
                 Remote Friendly
@@ -389,7 +389,6 @@ async function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="scroll-hint">
           <span className="scroll-text">scroll</span>
           <div className="scroll-line" />

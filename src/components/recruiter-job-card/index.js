@@ -123,7 +123,7 @@ function RecruiterJobCard({ jobItem, jobApplications }) {
       `}</style>
 
       <div className="rjc-card">
-        {/* Top row */}
+    
         <div className="rjc-top">
           <div className="rjc-icon-wrap">
             <JobIcon />
@@ -140,12 +140,12 @@ function RecruiterJobCard({ jobItem, jobApplications }) {
           </div>
         </div>
 
-        {/* Title */}
+      
         <div className="rjc-title">{jobItem?.title}</div>
 
         <div className="rjc-divider" />
 
-        {/* Footer */}
+    
         <div className="rjc-footer">
           <p className="rjc-footer-label">
             {applicantCount > 0 ? (

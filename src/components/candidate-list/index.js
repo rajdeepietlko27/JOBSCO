@@ -46,7 +46,7 @@ function CandidateList({
 
   const info = currentCandidateetails?.candidateInfo;
 
-  // ✅ FIXED: Resume is already fixed (using window.open)
+ 
   function handlePreviewresume() {
     const { data } = SupabaseClient.storage
       .from("job-board-public")
@@ -55,7 +55,7 @@ function CandidateList({
     window.open(data?.publicUrl, "_blank");
   }
 
-  // ✅ FIXED: typo `cpyJobApplicants` → `jobApplications` (was referencing undefined `jobApplication`)
+ 
   async function handleUpdateJobStatus(getCurrentStatus) {
     let cpyJobApplicants = [...jobApplications];
     const indexOfCurrentApplicaton = cpyJobApplicants.findIndex(
@@ -71,7 +71,7 @@ function CandidateList({
     await updateJobApplicationAction(JobApplicantsToUpdate, "/jobs");
   }
 
-  // ✅ FIXED: Helper to get current applicant's status array cleanly
+ 
   function getCurrentApplicantStatus() {
     return (
       jobApplications.find(
@@ -80,14 +80,14 @@ function CandidateList({
     );
   }
 
-  // ✅ FIXED: `"selected" || "rejected"` always evaluated to `"selected"` — now checks both
+ 
   const currentStatus = getCurrentApplicantStatus();
   const isAlreadyActioned =
     currentStatus.includes("selected") || currentStatus.includes("rejected");
 
   return (
     <Fragment>
-      {/* ── Candidate Cards ── */}
+  
       <div className="grid grid-cols-1 gap-4 p-8 md:grid-cols-2 lg:grid-cols-3">
         {jobApplications && jobApplications.length > 0 ? (
           jobApplications.map((jobApplicantItem) => (
@@ -95,13 +95,13 @@ function CandidateList({
               key={jobApplicantItem?._id}
               className="group relative bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Top color strip */}
+           
               <div
                 className={`h-1.5 w-full bg-gradient-to-r ${getColor(jobApplicantItem?.name)}`}
               />
 
               <div className="p-5 flex items-center gap-4">
-                {/* Avatar */}
+              
                 <div
                   className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getColor(
                     jobApplicantItem?.name,
@@ -110,7 +110,7 @@ function CandidateList({
                   {jobApplicantItem?.name?.charAt(0) ?? "?"}
                 </div>
 
-                {/* Info */}
+              
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-bold text-gray-900 truncate">
                     {jobApplicantItem?.name}
@@ -120,7 +120,7 @@ function CandidateList({
                   </p>
                 </div>
 
-                {/* Button */}
+           
                 <button
                   onClick={() =>
                     handleFetchCandidateDetails(
@@ -144,7 +144,7 @@ function CandidateList({
         )}
       </div>
 
-      {/* ── Candidate Detail Dialog ── */}
+  
       <Dialog
         open={showCurrentCandidateDetailsModel}
         onOpenChange={() => {
@@ -157,7 +157,7 @@ function CandidateList({
             <DialogTitle>Candidate Details</DialogTitle>
           </VisuallyHidden>
 
-          {/* Header */}
+         
           <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-8 pt-10 pb-16">
             <div className="flex items-center gap-4">
               <div
@@ -180,7 +180,7 @@ function CandidateList({
             <div className="absolute bottom-0 right-16 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 pointer-events-none" />
           </div>
 
-          {/* Stats */}
+        
           <div className="grid grid-cols-3 divide-x divide-gray-100 -mt-8 mx-6 bg-white rounded-xl shadow-lg border border-gray-100 relative z-10">
             {[
               {
@@ -206,9 +206,9 @@ function CandidateList({
             ))}
           </div>
 
-          {/* Body */}
+       
           <div className="px-6 pt-5 pb-7 space-y-5">
-            {/* Company & Location */}
+        
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center">
@@ -224,7 +224,7 @@ function CandidateList({
               </div>
             </div>
 
-            {/* Skills */}
+        
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">
                 Skills
@@ -241,7 +241,7 @@ function CandidateList({
               </div>
             </div>
 
-            {/* Previous Companies */}
+          
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">
                 Previous Companies

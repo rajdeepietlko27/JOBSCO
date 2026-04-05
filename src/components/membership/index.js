@@ -398,7 +398,7 @@ function MemberShip({ profileInfo }) {
       `}</style>
 
       <div className="mem-root">
-        {/* Hero */}
+      
         <div className="mem-hero">
           <div className="mem-hero-grid" />
           <div className="mem-hero-glow" />
@@ -434,9 +434,9 @@ function MemberShip({ profileInfo }) {
           </div>
         </div>
 
-        {/* Body */}
+       
         <div className="mem-body">
-          {/* Premium active banner */}
+         
           {profileInfo?.isPremiumUser && (
             <div className="mem-premium-banner">
               <div className="mem-premium-banner-left">
@@ -447,7 +447,7 @@ function MemberShip({ profileInfo }) {
             </div>
           )}
 
-          {/* Plan cards */}
+        
           <div className="mem-grid">
             {membershipPlans.map((plan, index) => {
               const accent = planAccents[index] || "#6c47ff";
@@ -469,13 +469,13 @@ function MemberShip({ profileInfo }) {
                   key={plan.price}
                   className={`mem-plan-card${isActive ? " is-active" : ""}`}
                 >
-                  {/* Top color stripe */}
+          
                   <div
                     className="mem-plan-card-stripe"
                     style={{ background: accent }}
                   />
 
-                  {/* Top row */}
+                
                   <div className="mem-plan-top">
                     <div
                       className="mem-plan-icon"
@@ -494,7 +494,7 @@ function MemberShip({ profileInfo }) {
                     </div>
                   </div>
 
-                  {/* Price */}
+                 
                   <div className="mem-plan-price">
                     <sup>$</sup>{plan.price}
                   </div>
@@ -508,7 +508,6 @@ function MemberShip({ profileInfo }) {
 
                   <div className="mem-plan-divider" />
 
-                  {/* Features */}
                   <ul className="mem-plan-features">
                     {features.map((feat) => (
                       <li key={feat}>
@@ -523,7 +522,7 @@ function MemberShip({ profileInfo }) {
                     ))}
                   </ul>
 
-                  {/* CTA */}
+                
                   {isOwned ? (
                     <div className="mem-plan-cta-owned">
                       {isActive ? "✓ Current Plan" : "Already Included"}

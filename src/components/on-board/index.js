@@ -18,7 +18,7 @@ const supaBaseClient = createClient(
   "sb_publishable_Y89cVt1IkmIJbR8i0xbvrg_zj6EL7T5",
 );
 
-// ── Upload box ────────────────────────────────────────────────────────────────
+
 function ResumeUpload({ onChange, fileName }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -29,7 +29,7 @@ function ResumeUpload({ onChange, fileName }) {
         htmlFor="resume-upload"
         className="flex items-center gap-4 rounded-xl border border-dashed border-gray-200 bg-white px-5 py-5 cursor-pointer transition-all hover:border-blue-500 hover:bg-blue-50"
       >
-        {/* Icon */}
+        
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50">
           <svg
             className="w-5 h-5 text-blue-600"
@@ -42,7 +42,7 @@ function ResumeUpload({ onChange, fileName }) {
             <polyline points="9 16 12 13 15 16" />
           </svg>
         </div>
-        {/* Text */}
+       
         <div>
           <p className="text-sm font-medium text-gray-800">
             {fileName ? fileName : "Upload your resume"}
@@ -61,7 +61,6 @@ function ResumeUpload({ onChange, fileName }) {
   );
 }
 
-// ── Role pill ─────────────────────────────────────────────────────────────────
 function RolePill({ label, color = "blue" }) {
   const styles = {
     blue: "bg-blue-50 text-blue-600",
@@ -81,7 +80,7 @@ function RolePill({ label, color = "blue" }) {
   );
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
+
 function OnBoard() {
   const [currentTab, setCurrentTab] = useState("candidate");
   const [recruiterFromData, setRecruiterFormData] = useState(initialRecruiterFormData);
@@ -155,11 +154,11 @@ function OnBoard() {
       className="min-h-screen"
       style={{ background: "#f7f6f2", fontFamily: "'DM Sans', sans-serif" }}
     >
-      {/* Google Fonts */}
+   
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap');`}</style>
 
       <Tabs value={currentTab} onValueChange={handleTabChange} className="w-full">
-        {/* ── Header ── */}
+       
         <div className="mx-auto max-w-2xl px-6">
           <div className="flex items-end justify-between border-b border-gray-200 pt-14 pb-5 mb-10">
             <h1
@@ -187,12 +186,12 @@ function OnBoard() {
           </div>
         </div>
 
-        {/* ── Candidate Form ── */}
+     
         <TabsContent value="candidate">
           <div className="mx-auto max-w-2xl px-6 pb-20">
             <RolePill label="Candidate profile" color="blue" />
 
-            {/* Resume upload */}
+          
             <div className="mb-4">
               <ResumeUpload
                 onChange={handleFileChange}
@@ -200,7 +199,7 @@ function OnBoard() {
               />
             </div>
 
-            {/* Rest of candidate fields via CommonForm */}
+            
             <CommonForm
               formData={candidateFormData}
               setFormData={setCandidateFormData}
@@ -211,7 +210,7 @@ function OnBoard() {
               buttonText={null}
             />
 
-            {/* Submit button */}
+       
             <button
               onClick={createProfile}
               disabled={!handleCandidateFormValid()}
@@ -226,7 +225,7 @@ function OnBoard() {
           </div>
         </TabsContent>
 
-        {/* ── Recruiter Form ── */}
+      
         <TabsContent value="recruiter">
           <div className="mx-auto max-w-2xl px-6 pb-20">
             <RolePill label="Recruiter profile" color="green" />
@@ -240,7 +239,7 @@ function OnBoard() {
               buttonText={null}
             />
 
-            {/* Submit button */}
+          
             <button
               onClick={createProfile}
               disabled={!handleRecruiterFormValid()}

@@ -11,7 +11,7 @@ import {
 import { createJobApplicationAction } from "@/actions";
 import Link from "next/link";
 
-// ── Gradient icon backgrounds per index ──────────────────────────────────────
+
 const ICON_GRADIENTS = [
   "from-indigo-950 to-violet-900",
   "from-blue-950 to-blue-800",
@@ -71,18 +71,17 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
     <Fragment>
       <Drawer open={showJobDetailsDrawer} onOpenChange={setShowJobDetailsDrawer}>
 
-        {/* ── Card ── */}
         <div
           className="group relative bg-white border border-[#e8e5de] rounded-[20px] p-6 flex flex-col gap-4
                      transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:border-gray-200 overflow-hidden"
         >
-          {/* Top accent bar on hover */}
+       
           <span
             className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-600 to-violet-600
                        opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-t-[20px]"
           />
 
-          {/* Icon + meta */}
+       
           <div className="flex items-start gap-3">
             <JobCardIcon index={index} />
             <div className="flex-1 min-w-0">
@@ -98,7 +97,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
             </div>
           </div>
 
-          {/* Tags */}
+        
           <div className="flex flex-wrap gap-2">
             {jobItem?.location && (
               <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-blue-50 text-blue-600">
@@ -117,7 +116,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
             )}
           </div>
 
-          {/* Button */}
+    
           <DrawerTrigger asChild>
             <button
               className="w-full py-3 rounded-xl bg-gray-900 text-white text-[13px] font-semibold
@@ -129,10 +128,10 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
           </DrawerTrigger>
         </div>
 
-        {/* ── Drawer ── */}
+     
         <DrawerContent className="p-0 overflow-hidden max-w-3xl mx-auto rounded-t-3xl border-0">
 
-          {/* Dark header */}
+      
           <div className="bg-[#0f0f14] px-9 pt-8 pb-7">
             <DrawerHeader className="p-0">
               <p className="text-[11px] font-medium uppercase tracking-widest text-gray-500 mb-1.5">
@@ -154,7 +153,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
                 </div>
               )}
 
-              {/* Actions */}
+             
               <div className="flex gap-2.5 mt-5">
                 <button
                   onClick={handleJobApply}
@@ -179,10 +178,10 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
             </DrawerHeader>
           </div>
 
-          {/* White body */}
+        
           <div className="px-9 py-7 bg-white flex flex-col gap-6">
 
-            {/* Badges */}
+          
             <div className="flex flex-wrap gap-2.5">
               {jobItem?.type && (
                 <span className="inline-flex items-center gap-1.5 text-[12px] font-medium px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
@@ -198,7 +197,7 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
               )}
             </div>
 
-            {/* Description */}
+          
             {jobItem?.description && (
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-300 mb-2">
@@ -210,7 +209,6 @@ function CandidateJobCard({ jobItem, profileInfo, jobApplications, index = 0 }) 
               </div>
             )}
 
-            {/* Skills */}
             {jobItem?.skills && (
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-300 mb-3">

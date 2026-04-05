@@ -131,7 +131,7 @@ export default function Signup() {
         <div className="a-blob a-blob-4" />
         <div className="a-dots" />
 
-        {/* Floating chips */}
+     
         <div className="auth-chip auth-chip-1">
           <span className="auth-chip-dot" style={{background:'#ffd166'}} />
           3.4k+ Companies

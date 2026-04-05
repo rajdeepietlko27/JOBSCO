@@ -77,7 +77,7 @@ function AccountInfo({ profileInfo }) {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/60">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
 
-        {/* Header */}
+     
         <div className="rounded-3xl border border-white/70 bg-white/80 px-6 py-8 shadow-[0_10px_40px_rgba(15,23,42,0.08)] backdrop-blur md:px-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
@@ -116,7 +116,7 @@ function AccountInfo({ profileInfo }) {
           </div>
         </div>
 
-        {/* Main card */}
+      
         <div className="mt-8 rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
           <div className="border-b border-slate-100 px-6 py-5 sm:px-8">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -158,7 +158,7 @@ function AccountInfo({ profileInfo }) {
             </div>
           </div>
 
-          {/* ✅ Danger Zone - only for recruiters */}
+     
           {!isCandidate && (
             <div className="mx-6 mb-8 rounded-2xl border border-red-100 bg-red-50/50 p-5 sm:mx-8">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -180,7 +180,7 @@ function AccountInfo({ profileInfo }) {
           )}
         </div>
 
-        {/* ✅ Confirmation Modal */}
+    
         {showDeleteConfirm && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
             <div className="mx-4 w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl">

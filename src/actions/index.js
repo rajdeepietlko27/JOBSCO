@@ -140,7 +140,7 @@ export async function updateProfileAction(data, pathTorevalidate) {
   revalidatePath(pathTorevalidate);
 }
 
-// ✅ NEW - Delete recruiter + all their jobs + all applications
+
 export async function deleteRecruiterAction(userId, pathTorevalidate) {
   try {
     await connectToDB();

@@ -93,12 +93,12 @@ function JobListing({
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
       `}</style>
 
-      {/* ── Dark Hero ─────────────────────────────────────────────────────── */}
+     
       <div
         className="relative overflow-hidden px-10 pt-14 pb-16"
         style={{ background: "#0d0d0d" }}
       >
-        {/* subtle grid */}
+       
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -107,7 +107,7 @@ function JobListing({
             backgroundSize: "48px 48px",
           }}
         />
-        {/* glow */}
+       
         <div
           className="absolute pointer-events-none"
           style={{
@@ -118,7 +118,7 @@ function JobListing({
         />
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          {/* eyebrow pill */}
+         
           <span
             className="inline-flex items-center gap-2 mb-4 px-3.5 py-1.5 rounded-full text-[11px] font-medium uppercase tracking-widest"
             style={{
@@ -149,7 +149,7 @@ function JobListing({
               : "Manage your job postings and track applicants in one place."}
           </p>
 
-          {/* stat chips */}
+         
           <div className="flex gap-2.5 flex-wrap">
             {[
               {
@@ -187,7 +187,7 @@ function JobListing({
         </div>
       </div>
 
-      {/* ── Filter / Action Bar ───────────────────────────────────────────── */}
+     
       <div
         className="sticky top-0 z-20 bg-white"
         style={{ borderBottom: "1px solid #eae7df" }}
@@ -199,7 +199,7 @@ function JobListing({
           </p>
 
           {isCandidate ? (
-            /* Filter menus */
+         
             <Menubar className="border-0 bg-transparent p-0 gap-1 h-auto">
               {filterMenus.map((filterMenu) => (
                 <MenubarMenu key={filterMenu.name}>
@@ -243,7 +243,7 @@ function JobListing({
               ))}
             </Menubar>
           ) : (
-            /* Post Job button */
+        
             <div className="[&_button]:!bg-[#1D9E75] [&_button]:!text-white [&_button]:!border-0 [&_button]:!rounded-xl [&_button]:!font-semibold [&_button]:!text-[13px] [&_button]:!px-5 [&_button]:!py-2.5 [&_button:hover]:!bg-[#0F6E56]">
               <PostNewJobs
                 jobList={jobList}
@@ -255,7 +255,6 @@ function JobListing({
         </div>
       </div>
 
-      {/* ── Job Cards Grid ────────────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-10 py-9 pb-20">
         {jobList && jobList.length > 0 ? (
           <div
@@ -282,7 +281,7 @@ function JobListing({
             )}
           </div>
         ) : (
-          /* Empty state */
+         
           <div className="text-center py-20">
             <p className="text-5xl mb-4 opacity-30">📋</p>
             <h3

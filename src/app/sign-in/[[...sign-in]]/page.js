@@ -130,14 +130,14 @@ export default function Signin() {
       `}</style>
 
       <div className="auth-root">
-        {/* Blobs */}
+     
         <div className="a-blob a-blob-1" />
         <div className="a-blob a-blob-2" />
         <div className="a-blob a-blob-3" />
         <div className="a-blob a-blob-4" />
         <div className="a-dots" />
 
-        {/* Floating chips */}
+    
         <div className="auth-chip auth-chip-1">
           <span className="auth-chip-dot" style={{background:'#06d6a0'}} />
           12k+ Jobs Listed
@@ -155,7 +155,7 @@ export default function Signin() {
           Free to Join
         </div>
 
-        {/* Card */}
+       
         <div className="auth-card-wrap">
           <div className="auth-brand">
             JOBSCO <span className="auth-brand-dot" />

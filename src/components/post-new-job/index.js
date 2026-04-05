@@ -72,7 +72,7 @@ function PostNewJobs({ profileInfo, user , jobList }) {
         }}
       >
         <DialogContent className="sm:max-w-2xl max-h-[85vh] overflow-hidden flex flex-col p-0 gap-0 rounded-2xl border border-gray-200 shadow-2xl">
-          {/* Header */}
+      
           <DialogHeader className="px-8 pt-8 pb-5 border-b border-gray-100">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-black flex items-center justify-center">
@@ -100,7 +100,7 @@ function PostNewJobs({ profileInfo, user , jobList }) {
             </div>
           </DialogHeader>
 
-          {/* Scrollable Form Body */}
+         
           <div className="overflow-y-auto flex-1 px-8 py-6">
             <CommonForm
               buttonText={"Publish Job"}

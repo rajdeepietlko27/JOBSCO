@@ -11,7 +11,7 @@ const isProtectedRoute = createRouteMatcher([
 const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
-  "/sign-up(.*)",  // ✅ already there, good
+  "/sign-up(.*)",  
   "/api/stripe(.*)",
 ]);
 
