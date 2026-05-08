@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 💼 JOBSCO – Full Stack Job Board Platform
 
-## Getting Started
+JOBSCO is a full-stack job board web application where recruiters can post jobs and manage applicants, while candidates can browse opportunities, apply, and track their application status — all in one place.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🧭 **Dual Role Onboarding** – Sign up as a Candidate or Recruiter with a tailored onboarding flow
+- 📋 **Job Listings** – Recruiters can post, manage, and monitor all their job openings
+- 🔍 **Smart Filters** – Candidates can filter jobs by location and type with URL-synced filters
+- 🚀 **One-Click Apply** – Candidates apply instantly and never see the same job twice as "applied"
+- 📊 **Activity Tracker** – Candidates track application status (Applied / Selected / Rejected) in one place
+- 👥 **Applicant Management** – Recruiters view all applicants per job and select or reject candidates
+- 📄 **Resume Viewer** – Recruiters can preview or download candidate resumes directly
+- 🔒 **Authentication** – Secure login and session management via Clerk
+- 📁 **File Uploads** – Resume PDF upload and storage via Supabase Storage
+- 📱 **Responsive Design** – Fully responsive across mobile and desktop
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+| Tool | Purpose |
+|------|---------|
+| Next.js 14 | Full-stack React framework (App Router + Server Actions) |
+| React | UI components and client-side interactivity |
+| Tailwind CSS | Utility-first styling |
+| Shadcn UI | Accessible component library |
+| Clerk | Authentication and user session management |
+
+### Backend
+
+| Tool | Purpose |
+|------|---------|
+| MongoDB | Primary database for profiles, jobs, and applications |
+| Mongoose | ODM for MongoDB schema and queries |
+| Next.js Server Actions | Serverless backend logic (no separate Express server) |
+
+### Storage & External
+
+| Service | Purpose |
+|---------|---------|
+| Supabase Storage | Resume PDF uploads and public URL generation |
+
+> **Collections:** `Profile` , `Job` , `Application`
+
+---
+
+## 🚀 Run Locally
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- A MongoDB connection string (MongoDB Atlas works out of the box)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AnjaliSingh605/jobsco.git
+cd jobsco
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/onboard
+
+MONGODB_URL=your_mongodb_connection_string
+
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔄 How It Works
 
-## Learn More
+```
+User signs up via Clerk
+        ↓
+Redirected to Onboarding → selects Candidate or Recruiter role
+        ↓
+Profile saved to MongoDB with role attached
 
-To learn more about Next.js, take a look at the following resources:
+── Candidate Flow ──────────────────────────
+Browses jobs with location & type filters (URL-synced)
+        ↓
+Opens job drawer → clicks Apply
+        ↓
+Application saved to MongoDB (status: ['Applied'])
+        ↓
+Tracks application status on Activity page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+── Recruiter Flow ──────────────────────────
+Posts a new job → saved to MongoDB
+        ↓
+Views all applicants per job in a side drawer
+        ↓
+Opens candidate detail → previews resume from Supabase
+        ↓
+Selects or Rejects candidate → status updated in MongoDB
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔑 Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Publishable key from [Clerk Dashboard](https://clerk.com) |
+| `CLERK_SECRET_KEY` | Secret key from Clerk Dashboard |
+| `MONGODB_URL` | MongoDB connection string from [MongoDB Atlas](https://cloud.mongodb.com) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Project URL from [Supabase Dashboard](https://supabase.com) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon/public key from Supabase Dashboard |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 👩‍💻 Author
+
+Rajdeep Singh
+
+- GitHub: [@rajdeepietlko27](https://github.com/rajdeepietlko27)
