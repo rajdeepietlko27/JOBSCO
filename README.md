@@ -60,7 +60,7 @@ JOBSCO is a full-stack job board web application where recruiters can post jobs 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AnjaliSingh605/jobsco.git
+git clone https://github.com/rajdeepietlko27/jobsco.git
 cd jobsco
 ```
 
